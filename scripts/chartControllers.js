@@ -120,3 +120,39 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope) {
   }
 
 });
+
+app.controller('hourlyCommitChartController', function ($scope) {
+
+  // Load Charts and the corechart package.
+  google.charts.load('current', {
+    'packages': ['corechart']
+  });
+
+  // Draw the pie chart for Contributor List when Charts is loaded.
+  google.charts.setOnLoadCallback(contributorListChart);
+
+  function contributorListChart() {
+    
+    var data = google.visualization.arrayToDataTable([
+      ['Hours', '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM', '7:00 AM', '8:00 AM', { role: 'annotation' } ],
+      ['Sunday', 10, 24, 20, 32, 18, 5, 2, 2, ''],
+      ['Monday', 16, 22, 23, 30, 16, 9, 3, 4, ''],
+      ['Tuesday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
+      ['Wedneday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
+      ['Thursday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
+      ['Friday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
+      ['Saturday', 28, 19, 29, 30, 12, 13, 6, 8, '']
+    ]);
+
+    var options = {
+      title: 'Number of Commits per hour in each day of week',
+      legend: { position: 'top'},
+      bar: { groupWidth: '50%' },
+      isStacked: true
+    };
+
+    var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_'+ $scope.repo.name ));
+    chart.draw(data, options);
+  }
+
+});
