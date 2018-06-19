@@ -121,6 +121,38 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope) {
 
 });
 
+app.controller('weeklyCommitCountChartController', function ($scope) {
+
+  // Load Charts and the corechart package.
+  google.charts.load('current', {
+    'packages': ['corechart']
+  });
+
+  // Draw the pie chart for Contributor List when Charts is loaded.
+  google.charts.setOnLoadCallback(contributorListChart);
+
+  function contributorListChart() {
+        
+      var data = google.visualization.arrayToDataTable([
+        ['Week', 'All', 'Owner'],
+        ['1',  0,      0],
+        ['2',  3,      1],
+        ['3',  3,       3],
+        ['4',  0,      0]
+      ]);
+
+      var options = {
+        title: 'weekly commit count for the repository',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+    var chart = new google.visualization.LineChart(document.querySelector('#weekly-commit-count-chart_'+ $scope.repo.name ));
+    chart.draw(data, options);
+  }
+
+});
+
 app.controller('hourlyCommitChartController', function ($scope) {
 
   // Load Charts and the corechart package.
