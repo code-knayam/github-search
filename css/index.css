@@ -191,17 +191,32 @@ header nav a:hover {
   margin: 80px 10px;
   width: 100%;
 }
-.user-details .repo-list .repo {
+.user-details .repo-list .repo-item {
   /* border: 1px solid #2699FB;   */
   width: 100%;
   min-height: 600px;
-  padding: 50px;
-  margin: 10px 10px 30px;
-  background: #FFFFFF;
+  padding: 50px 30px;
+  margin: 10px 4px 30px;
+  background: #FDFDFF;
   box-shadow: 0 0 10px #aaa;
-  border-radius: 20px;
+  border-radius: 6px;
 }
 
+
+/* Chart */
+.chart-container {
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  position: relative;
+}
+.chart-container .chart {
+  width: 100%;
+  height: auto;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
 
 /* -------------------------------- */
 /* Error page */

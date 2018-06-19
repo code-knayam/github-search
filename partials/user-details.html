@@ -21,11 +21,8 @@
       </div>      
       
       <div class="repo-list">
-        <div class="repo" ng-repeat="repo in repos">
-          <h4>{{repo.name}}</h4>     
-          <p>{{repo.description}}</p>     
-
-          <api-contributor-list-directive></api-contributor-list-directive>
+        <div class="repo-item" ng-repeat="repo in repos">          
+          <div repo-detials-directive repo="repo"></div>
         </div>
       </div>
     </div>    

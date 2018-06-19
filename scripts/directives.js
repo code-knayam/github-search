@@ -1,8 +1,12 @@
-app.directive('apiContributorListDirective', function () {
-  
+app.directive('repoDetialsDirective', function () {
   return {
-    restrict: 'E',
-    templateUrl: '../partials/apiCharts/contributorListChart.html'
-  }  
-
+    restrict: 'A',
+    scope: {
+      repo: '='
+    },
+    templateUrl: '../partials/repo-details.html',
+    link: function ($scope, $elem, $attr) {
+      
+    }
+  };
 });

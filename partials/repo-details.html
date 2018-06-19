@@ -1,0 +1,20 @@
+<label for="">Repository Name : </label>
+<h4>{{repo.name}}</h4>
+<label for="">Repository description : </label>
+<p>{{repo.description}}</p>
+
+<div class="chart-container">
+  <div class="row">
+
+    <div class="col-6">
+      <div class="chart" id="contributor-list-chart_{{repo.name}}" ng-controller="contributorListChartController"></div>
+    </div>
+    <div class="col-6">
+      <div class="chart" id="commit-activity-chart_{{repo.name}}" ng-controller="commitActivityChartController"></div>
+    </div>
+    <div class="col-6">
+      <div class="chart" id="weekly-addition-deletion-chart_{{repo.name}}" ng-controller="weeklyAdditionDeletionChartController"></div>
+    </div>
+  </div>
+    
+</div>
