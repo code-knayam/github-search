@@ -1,26 +1,72 @@
-<label for="">Repository Name : </label>
-<h4>{{repo.name}}</h4>
-<label for="">Repository description : </label>
-<p>{{repo.description}}</p>
+<!-- <h4 class="repo-name"><span>Repository Name : </span>{{repo.name}}</h4>
+<p class="repo-desc"><span>Repository Desc : </span>{{repo.description}}</p> -->
+<div class="repo-heading">
+  <a ng-href="{{repo.html_url}}" class="repo-name" target="_blank">
+    <i class="fas fa-code-branch"></i>{{repo.name}}</a>
+</div>
+<p class="repo-desc">{{repo.description}}</p>
 
-<div class="chart-container">
+<div class="chart-container" ng-controller="repoDetailController">
   <div class="row">
 
-    <div class="col-6">
-      <div class="chart" id="contributor-list-chart_{{repo.name}}" ng-controller="contributorListChartController"></div>
+    <div class="col-md-2">
+      <ul class="api-list">
+        <li class="api-item">
+          <a ng-click="showApiChart(1)">API 1</a>
+        </li>
+        <li class="api-item">
+          <a ng-click="showApiChart(2)">API 2</a>
+        </li>
+        <li class="api-item">
+          <a ng-click="showApiChart(3)">API 3</a>
+        </li>
+        <li class="api-item">
+          <a ng-click="showApiChart(4)">API 4</a>
+        </li>
+        <li class="api-item">
+          <a ng-click="showApiChart(5)">API 5</a>
+        </li>
+      </ul>
     </div>
-    <div class="col-6">
-      <div class="chart" id="commit-activity-chart_{{repo.name}}" ng-controller="commitActivityChartController"></div>
-    </div>
-    <div class="col-6">
-      <div class="chart" id="weekly-addition-deletion-chart_{{repo.name}}" ng-controller="weeklyAdditionDeletionChartController"></div>
-    </div>
-    <div class="col-6">
-      <div class="chart" id="weekly-commit-count-chart_{{repo.name}}" ng-controller="weeklyCommitCountChartController"></div>
-    </div>
-    <div class="col-6">
-      <div class="chart" id="hourly-commit-chart_{{repo.name}}" ng-controller="hourlyCommitChartController"></div>
+
+    <div class="col-10">
+      <div class="chart-info">
+        <h5>Get contributors list with additions, deletions, and commit counts</h5>
+        <p>GET /repos/:owner/:repo/stats/contributors</p>
+        <div class="chart" id="contributor-list-chart_{{repo.name}}" ng-controller="contributorListChartController"></div>
+      </div>
+      <div class="chart-info">
+        <h5>Get the last year of commit activity data</h5>
+        <p>Returns the last year of commit activity grouped by week. The days array is a group of commits per day, starting
+          on Sunday
+          <br>GET /repos/:owner/:repo/stats/commit_activity</p>
+        <div class="chart" id="commit-activity-chart_{{repo.name}}" ng-controller="commitActivityChartController"></div>
+      </div>
+      <div class="chart-info">
+        <h5>Get the number of additions and deletions per week</h5>
+        <p>Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
+          <br>GET /repos/:owner/:repo/stats/code_frequency</p>
+        <div class="chart" id="weekly-addition-deletion-chart_{{repo.name}}" ng-controller="weeklyAdditionDeletionChartController"></div>
+      </div>
+      <div class="chart-info">
+        <h5>Get the weekly commit count for the repository owner and everyone else</h5>
+        <p>Returns the total commit counts for the owner and total commit counts in all. all is everyone combined, including
+          the owner in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract owner from
+          all.
+          <br>GET /repos/:owner/:repo/stats/participation</p>
+        <div class="chart" id="weekly-commit-count-chart_{{repo.name}}" ng-controller="weeklyCommitCountChartController"></div>
+      </div>
+      <div class="chart-info">
+        <h5>Get the number of commits per hour in each day</h5>
+        <p>Each array contains the day number, hour number, and number of commits
+          <br>GET /repos/:owner/:repo/stats/punch_card</p>
+        <div class="chart" id="hourly-commit-chart_{{repo.name}}" ng-controller="hourlyCommitChartController"></div>
+      </div>
+
+
+
+
     </div>
   </div>
-    
+
 </div>

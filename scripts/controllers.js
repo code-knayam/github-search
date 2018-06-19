@@ -1885,4 +1885,16 @@ app.controller('userDetailController', function ($scope, $routeParams, $log, Git
       }
     }
   ];
+});
+
+app.controller('repoDetailController', function ($scope) {   
+
+  $scope.showApiChart = function (index) {
+    $('.chart-info').css('display', 'none');
+    console.log(index);
+    $('.chart-info:nth-child(' + index + ')').fadeIn(500);
+  }
+  $scope.showApiChart(1);
+
+  
 })

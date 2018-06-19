@@ -1,9 +1,7 @@
 app.directive('repoDetialsDirective', function () {
   return {
     restrict: 'A',
-    scope: {
-      repo: '='
-    },
+    scope: true,
     templateUrl: '../partials/repo-details.html',
     link: function ($scope, $elem, $attr) {
       

@@ -23,6 +23,8 @@ app.controller('contributorListChartController', function ($scope) {
     var options = {
       title: 'Contributor List',      
       is3D: true,
+      width: 800,
+      height: 400,
       tooltip: { isHtml: true }
     };
 
@@ -70,6 +72,8 @@ app.controller('commitActivityChartController', function ($scope) {
     var options = {
       title: 'Last Year Commit Activity ( Total ' + total_commits + ' commits)',
       pieHole: 0.2,
+      width: 800,
+      height: 400,
       sliceVisibilityThreshold: 0
     };
 
@@ -107,6 +111,8 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope) {
         1: {targetAxisIndex: 1}
       },
       title: 'Weekly addition and deletion',
+      width: 800,
+      height: 400,
       vAxes: {
         // Adds titles to each axis.
         0: {title: 'Addition'},
@@ -144,6 +150,8 @@ app.controller('weeklyCommitCountChartController', function ($scope) {
       var options = {
         title: 'weekly commit count for the repository',
         curveType: 'function',
+        width: 800,
+        height: 400,
         legend: { position: 'bottom' }
       };
 
@@ -180,7 +188,10 @@ app.controller('hourlyCommitChartController', function ($scope) {
       title: 'Number of Commits per hour in each day of week',
       legend: { position: 'top'},
       bar: { groupWidth: '50%' },
-      isStacked: true
+      width: 800,
+      height: 400,
+      isStacked: true,
+      legend: false
     };
 
     var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_'+ $scope.repo.name ));
