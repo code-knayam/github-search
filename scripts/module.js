@@ -1,1 +1,1 @@
-var app = angular.module('githubApp', []);
+var app = angular.module('githubApp', ['ngRoute']);

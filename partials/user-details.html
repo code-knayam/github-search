@@ -1,0 +1,34 @@
+<div class="user-details" ng-controller="userDetailController">
+  <div class="container">
+    <div class="row">
+
+      <div class="user-info">
+        <img class="img-thumbnail img-fluid" ng-src="{{userDetails.avatar_url}}" alt="">
+        <h2>{{userDetails.login}}</h2>
+        <span ng-if="userDetails.name" class="extra-info">
+          <i class="far fa-user"></i>
+          {{userDetails.name}}
+        </span>        
+        <span ng-if="userDetails.email" class="extra-info">
+          <i class="far fa-envelope-open"></i>
+          {{userDetails.email}}
+        </span>        
+        <span ng-if="repos" class="extra-info">
+          <i class="fas fa-code-branch"></i>
+          {{repos.length}} Repos
+        </span>
+
+      </div>      
+      
+      <div class="repo-list">
+        <div class="repo" ng-repeat="repo in repos">
+          <h4>{{repo.name}}</h4>     
+          <p>{{repo.description}}</p>     
+
+          <api-contributor-list-directive></api-contributor-list-directive>
+        </div>
+      </div>
+    </div>    
+
+  </div>
+</div>

@@ -9,6 +9,7 @@
 
   <!-- import angular -->
   <script src="./node_modules/angular/angular.min.js"></script>
+  <script src="./node_modules/angular-route/angular-route.min.js"></script>
   <!-- import jquery -->
   <script src="./node_modules/jquery/dist/jquery.min.js"></script>
   <!-- import bootstrap -->
@@ -17,11 +18,14 @@
 
   <!-- import angular script -->
   <script src="./scripts/module.js"></script>
+  <script src="./scripts/routing.js"></script>
   <script src="./scripts/controllers.js"></script>
   <script src="./scripts/githubService.js"></script>
+  <script src="./scripts/spinnerService.js"></script>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" 
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -31,53 +35,12 @@
 
   <header>
     <nav>
-      <a href="#">Github Search App</a>
+      <a href="/"><i class="fas fa-home"></i></a>
+      <a href="/">Github Search App</a>
     </nav>
   </header>
 
-  <div class="jumbotron" ng-controller="searchUserController">
-    <div class="container">
-      <div class="input-form">
-        <form name="searchUserForm">
-          <div class="row">
-
-            <!-- Offsetting input field -->
-            <div class="offset-4"></div>
-            <!-- input field -->
-            <div class="col-md-4">
-              <div class="form-group">
-                <input type="text" class="form-control" name="userName" ng-model="userName" required autocomplete="off">
-                <label 
-                  for="userName"
-                  ng-class="searchUserForm.userName.$dirty && searchUserForm.userName.$viewValue != '' ? 'active-label' : '';">User Name</label>
-              </div>
-              <button 
-                class="btn btn-primary" 
-                ng-class="searchUserForm.$valid ? 'active-btn' : 'inactive-btn' "                
-                ng-click="onSubmit()"
-                ng-disabled="searchUserForm.$invalid">Search</button>
-            </div>            
-          </div>
-        </form>
-      </div>
-
-      <div class="row">
-        Total Users found - <span ng-bind="total_count"></span>
-      </div>
-      <div class="table-responsive">
-
-        <table class="table table-striped table-bordered" id="userData">
-          <tbody>
-            <tr ng-repeat="user in users">
-              <td><img class="img-thumbnail img-fluid user-avatar" src="{{user.avatar_url}}" alt=""></td>
-              <td><p ng-bind="user.login"></p></td>
-              <td><a href="{{user.html_url}}" target="_blank">View Profile</a></td>
-            </tr>            
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <ng-view></ng-view>
 
 </body>
 

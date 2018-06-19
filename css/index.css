@@ -20,10 +20,15 @@ header {
   word-spacing: 8px;
   padding: 0;
   margin: 0;
+  z-index: 999;
 }
 header nav {
   margin: 0;
   padding: 0;
+}
+header nav a:first-child {
+  float: left;
+  padding: 0 30px;
 }
 header nav a {
   margin: 0;
@@ -32,65 +37,72 @@ header nav a {
   text-transform: uppercase;
   font-size: 20px;  
 }
+header nav a:hover {
+  color: #ffffff;
+}
 
 /* ----------- Jumbotron ----------- */
 .jumbotron {
-  height: 700px;
-  padding-top: 200px;
-  margin: 0;
-  background-image: url('../assets/GitHub_back.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-blend-mode: overlay;
+  min-height: 700px;  
+  margin: 0;  
+  padding: 0;
+  color: #333;
+  z-index: 1;
 }
 
+/* Input Search Form Container */
 .jumbotron .input-form {  
   width: 100%;
-  min-height: 200px;
+  min-height: 600px;
+  height: 600px;
+  margin: 0;
+  padding: 0;  
+  padding-top: 270px;
+  background-image: url('../assets/github_back.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;  
 }
-
 .jumbotron .input-form .form-group .form-control {
   position: relative;
   height: 40px;
   border-radius: 0;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.8);  
   box-shadow: none;
   border: none;
-  border-bottom: 1px solid #111;
-  padding: 5px;
+  border: 1px solid #111;
+  border-radius: 1000px;
+  padding: 5px 25px;  
   margin: 0;  
   z-index: 2;
   font-size: 16px;
+  color: #222;  
+}
+.jumbotron .input-form .form-group .form-control::placeholder {
+  color: #666;
+  font-size: 16px;
 }
 .jumbotron .input-form .form-group .form-control:focus {
-  border-bottom: 2px solid #111;
+  border: 2px solid #111;
+  background: rgba(255, 255, 255, 0.95);  
 }
-
-
-.jumbotron .input-form .form-group label {
+/* .jumbotron .input-form .form-group label {
   position: absolute;
   top: 0;
-  padding-left: 5px;
+  padding-left: 30px;
   line-height: 40px;
   z-index: 1;
   font-size: 14px;
   transition: .5s ease;
-  color: #444;
+  color: #2699FB;
 }
 .jumbotron .input-form .form-group .form-control:focus + label,
 .active-label {
-  margin-top: -20px;  
-  padding-left: 0;
-  color: #666;
-  font-size: 12px;
-}
-.inactive-label {
-  margin-top: 0;  
-  padding-left: 5px;
-  color: #444;
-  font-size: 16px;
-}
+  margin-top: -40px;    
+  border: 1px solid #2699FB;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1000px;
+} */
 
 .jumbotron .input-form  button {
   width: 150px;
@@ -105,7 +117,7 @@ header nav a {
   border-radius: 1000px;
 }
 .jumbotron .input-form button:hover {
-  background-color: #0c66b4;
+  background-color: #0c66b4;  
 }
 
 .inactive-btn {
@@ -116,13 +128,95 @@ header nav a {
   cursor: pointer;
 }
 
-#userData {
-  display: none;
+/* Search Result Container */
+.jumbotron .search-result {
+  background: linear-gradient(#ffffff, rgba(38, 153, 251, 0.1));
+  width: 100%;
+  min-height: 300px;
+  padding: 50px ;
+}
+.jumbotron .search-result h3 {
+  font-size: 23px;
+  color: #888;
+  text-align: left;
 }
 
-#userData .user-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  border: 2px solid #2699FB;
+.jumbotron .search-result .user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 1000px;
+  border: 3px solid #2699FB;
+}
+
+
+/* -------------------------------- */
+/* User Details Page */
+.user-details {
+  min-height: 700px;  
+  margin: 0;  
+  padding: 0;
+  padding-top: 100px;
+  width: 100%;
+  background: #eee;  
+}
+.user-details .user-info {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.user-details .user-info img {
+  width: 250px;
+  height: 250px;
+  border-radius: 1000px;
+  border: 3px solid #2699FB;
+  margin-bottom: 20px;
+}
+.user-details .user-info h2 {
+  font-size: 60px;
+  color: #222;  
+}
+.user-details .user-info .extra-info {
+  font-size: 14px;
+  color: #555;  
+  border: 1px solid #2699FB;
+  border-radius: 1000px; 
+  padding: 10px;
+  margin: 30px 10px;
+}
+.user-details .user-info .extra-info i {
+  color: #2699FB;
+}
+.user-details .repo-list {
+  margin: 80px 10px;
+  width: 100%;
+}
+.user-details .repo-list .repo {
+  /* border: 1px solid #2699FB;   */
+  width: 100%;
+  height: 500px;
+  padding: 50px;
+  margin: 10px 10px 30px;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px #aaa;
+  border-radius: 20px;
+}
+
+
+/* -------------------------------- */
+/* Error page */
+.error-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  
+  text-align: center;
+  width: 100%;
+}
+.error-page h2 {
+  font-size: 80px;
+  color: #222;
+}
+.error-page p {
+  font-size: 20px;
+  color: #555;
 }
