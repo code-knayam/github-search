@@ -10,6 +10,7 @@ app.controller('searchUserController', function ($scope, $log, $location, Github
     GithubService.getUserList(userName)
       .then(function (data) {
         $log.info('[searchUserController] User Names Fetch - Data from Service', data);
+        $('.search-result').fadeIn(100);
         showUserSearchResult(data);
       }, function (err) {
         $log.error('[searchUserController] User Names Fetch - Error from Service', err);
@@ -25,7 +26,14 @@ app.controller('searchUserController', function ($scope, $log, $location, Github
     $scope.total_count = data.total_count;
     if ($scope.total_count === 0) {
       $scope.showNotFoundMessage = true;
+      $scope.users = null;
     } else {
+      if ($scope.total_count > 50) {
+        $scope.showExtraInfo = true;
+      } else {
+        $scope.showExtraInfo = false;
+      }
+      $scope.showNotFoundMessage = false;
       $scope.users = data.items;
     }
     $scope.showSpinner = false;
