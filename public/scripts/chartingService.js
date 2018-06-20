@@ -47,7 +47,7 @@ app.factory('ChartingService', function () {
 
     for (var index in response) {
       var weekDetails = [];      
-      weekDetails.push(index + 1);
+      weekDetails.push(index);
       weekDetails.push(response[index][1]);
       weekDetails.push(response[index][2]);
       operatedResponse.push(weekDetails);
@@ -60,7 +60,7 @@ app.factory('ChartingService', function () {
     var operatedResponse = [];
 
     for (var index in response.all) {
-      var commitDetails = [index + 1, 0, 0];
+      var commitDetails = [index, 0, 0];
       commitDetails[1] += response.all[index];
       commitDetails[2] += response.owner[index];
       operatedResponse.push(commitDetails);
