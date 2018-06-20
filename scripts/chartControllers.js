@@ -81,22 +81,13 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
 
   function drawChart() {
     // Operating on response from API
-    
+    var response = ChartingService.operateCommitActivityResponse(apiResponse);
     // Configuring chart
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Day');
     data.addColumn('number', 'Total Commits');
-    data.addRows([
-      ['Sunday', 0],
-      ['Monday', 3],
-      ['Tuesday', 26],
-      ['Wednesday', 20],
-      ['Thursday', 39],
-      ['Friday', 1],
-      ['Saturday', 0]
-    ]);
-
-    var total_commits = 89;
+    data.addRows(response);
+    
     // Setting options for chart
     var options = {
       pieHole: 0.2,

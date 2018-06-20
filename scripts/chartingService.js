@@ -22,7 +22,28 @@ app.factory('ChartingService', function () {
       '</div> ';
   }
 
+  _operateCommitActivityResponse = function (response) {
+    var operatedResponse = [
+      ['Sunday', 0],
+      ['Monday', 0],
+      ['Tuesday', 0],
+      ['Wednesday', 0],
+      ['Thursday', 0],
+      ['Friday', 0],
+      ['Saturday', 0]
+    ];
+
+    for (var index in response) {
+      for (var dayIndex in response[index].days) {        
+        operatedResponse[dayIndex][1] += response[index].days[dayIndex];
+      }
+    }    
+
+    return operatedResponse;
+  }
+
   return {
-    operateContributorListResponse: _operateContributorListResponse
+    operateContributorListResponse: _operateContributorListResponse,
+    operateCommitActivityResponse: _operateCommitActivityResponse
   }
 })
