@@ -178,12 +178,12 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
   // Calling service function to get API response
   GithubService.getWeeklyCommitCountAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
-      $log.info('[contributorListChartController] Contributors API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
+      $log.info('[weeklyCommitCountChartController] Weekly Commit Count API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
       apiResponse = response;
       // calling function to Initialize chart
       initChart();
     }, function (err) {
-      $log.error('[contributorListChartController] Contributors API Error from Service', err);
+      $log.error('[weeklyCommitCountChartController] Weekly Commit Count API Error from Service', err);
     });
 
   function initChart() {
@@ -196,13 +196,13 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
   }
 
   function drawChart() {
-    var response = ChartingService.operateWeeklyCommitCountResponse(apiResponse);
+    var response = ChartingService.operateWeeklyCommitCountResponse(apiResponse);    
     // configuring chart
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Week');
     data.addColumn('number', 'All');
     data.addColumn('number', 'Owner');
-    data.addRows(response);    
+    data.addRows(response);
 
     var options = {
       series: {
@@ -238,29 +238,37 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
 
 });
 
-app.controller('hourlyCommitChartController', function ($scope) {
+app.controller('hourlyCommitChartController', function ($scope, $log, GithubService, ChartingService) {
 
-  // Load Charts and the corechart package.
-  google.charts.load('current', {
-    'packages': ['corechart']
-  });
+  var apiResponse;
 
-  // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(drawChart);
+  // Calling service function to get API response
+  GithubService.getHourlyCommitEachDayAPIResponse($scope.repo.owner.login, $scope.repo.name)
+    .then(function (response) {
+      $log.info('[hourlyCommitChartController] Hourly Commit Each Day API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
+      apiResponse = response;
+      // calling function to Initialize chart
+      initChart();
+    }, function (err) {
+      $log.error('[hourlyCommitChartController] Hourly Commit Each Day API Error from Service', err);
+    });
+
+  function initChart() {
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    // Draw the chart when Charts is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+  }
 
   function drawChart() {
-
+    // Operating on response from API
+    var response = ChartingService.operateHourlyCommitEachDayResponse(apiResponse);
+    // Configuring chart    
     var data = google.visualization.arrayToDataTable([
-      ['Hours', '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM', '7:00 AM', '8:00 AM', {
-        role: 'annotation'
-      }],
-      ['Sunday', 10, 24, 20, 32, 18, 5, 2, 2, ''],
-      ['Monday', 16, 22, 23, 30, 16, 9, 3, 4, ''],
-      ['Tuesday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
-      ['Wedneday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
-      ['Thursday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
-      ['Friday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
-      ['Saturday', 28, 19, 29, 30, 12, 13, 6, 8, '']
+      ['Hours', '12:00 AM', '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM', '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM', '9:00 PM', '10:00 PM', '11:00 PM'],
+      ...response
     ]);
 
     var options = {
@@ -274,7 +282,18 @@ app.controller('hourlyCommitChartController', function ($scope) {
       width: 800,
       height: 400,
       isStacked: true,
-      legend: false
+      legend: false,
+      vAxes: {
+        // Adds titles to each axis.
+        0: {
+          title: 'Day'
+        }
+      },
+      hAxes: {
+        0: {
+          title: 'Commit Count'
+        }
+      }
     };
 
     var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_' + $scope.repoIndex));

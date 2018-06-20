@@ -34,10 +34,10 @@ app.factory('ChartingService', function () {
     ];
 
     for (var index in response) {
-      for (var dayIndex in response[index].days) {        
+      for (var dayIndex in response[index].days) {
         operatedResponse[dayIndex][1] += response[index].days[dayIndex];
       }
-    }    
+    }
 
     return operatedResponse;
   }
@@ -47,13 +47,13 @@ app.factory('ChartingService', function () {
 
     for (var index in response) {
       var weekDetails = [];
-      var date = new Date(response[index][0]*1000);
+      var date = new Date(response[index][0] * 1000);
       weekDetails.push(date.toDateString());
       weekDetails.push(response[index][1]);
       weekDetails.push(response[index][2]);
       operatedResponse.push(weekDetails);
     }
-    
+
     return operatedResponse;
   }
 
@@ -61,11 +61,29 @@ app.factory('ChartingService', function () {
     var operatedResponse = [];
 
     for (var index in response.all) {
-      var commitDetails = [index, 0, 0];      
+      var commitDetails = [index, 0, 0];
       commitDetails[1] += response.all[index];
-      commitDetails[2] += response.owner[index];      
+      commitDetails[2] += response.owner[index];
       operatedResponse.push(commitDetails);
     }
+    return operatedResponse;
+  }
+
+  _operateHourlyCommitEachDayResponse = function (response) {
+    var operatedResponse = [
+      ['Sunday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ['Monday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ['Tuesday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ['Wedneday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ['Thursday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ['Friday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ['Saturday', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    for (var index in response) {
+      operatedResponse[response[index][0]][response[index][1] + 1] += response[index][2]
+    }
+    console.log(operatedResponse);
     return operatedResponse;
   }
 
@@ -73,6 +91,7 @@ app.factory('ChartingService', function () {
     operateContributorListResponse: _operateContributorListResponse,
     operateCommitActivityResponse: _operateCommitActivityResponse,
     operateWeeklyAddDelResponse: _operateWeeklyAddDelResponse,
-    operateWeeklyCommitCountResponse: _operateWeeklyCommitCountResponse
+    operateWeeklyCommitCountResponse: _operateWeeklyCommitCountResponse,
+    operateHourlyCommitEachDayResponse: _operateHourlyCommitEachDayResponse
   }
 })

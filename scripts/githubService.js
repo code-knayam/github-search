@@ -28,19 +28,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var userDetails$ = $q.defer();
 
-    // $http({
-    //   method: 'GET',
-    //   accept: 'application/vnd.github.v3+json',
-    //   url: 'https://api.github.com/users/' + userName + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    // }).then(function (response) {
-    //   $log.info('[GithubService] User Info API Response', response);
-    //   userDetails$.resolve(response.data);
-    // }, function (err) {
-    //   $log.error('[GithubService] User Info API Error ', err);
-    //   userDetails$.reject(err);
-    //   });
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/users/' + userName + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] User Info API Response', response);
+      userDetails$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService] User Info API Error ', err);
+      userDetails$.reject(err);
+      });
     
-    userDetails$.resolve(userDetailsStubResponse);
+    // userDetails$.resolve(userDetailsStubResponse);
 
     return userDetails$.promise;
   }
@@ -51,19 +51,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var userRepos$ = $q.defer();
 
-    // $http({
-    //   method: 'GET',
-    //   accept: 'application/vnd.github.v3+json',
-    //   url: 'https://api.github.com/users/' + userName + '/repos' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    // }).then(function (response) {
-    //   $log.info('[GithubService] User Repos API Response', response);
-    //   userRepos$.resolve(response.data);
-    // }, function (err) {
-    //   $log.error('[GithubService]  User Repos API Error ', err);
-    //   userRepos$.reject(err);
-    //   });
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/users/' + userName + '/repos' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] User Repos API Response', response);
+      userRepos$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService]  User Repos API Error ', err);
+      userRepos$.reject(err);
+      });
 
-    userRepos$.resolve(userReposStubResponse);
+    // userRepos$.resolve(userReposStubResponse);
     
     return userRepos$.promise;
   };
@@ -74,19 +74,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var contributors$ = $q.defer();
 
-    // $http({
-    //   method: 'GET',
-    //   accept: 'application/vnd.github.v3+json',
-    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/contributors' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    // }).then(function (response) {
-    //   $log.info('[GithubService] Contributors API Response', response);
-    //   contributors$.resolve(response.data);
-    // }, function (err) {
-    //   $log.error('[GithubService]  Contributors API Error ', err);
-    //   contributors$.reject(err);
-    //   });
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/contributors' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] Contributors API Response', response);
+      contributors$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService]  Contributors API Error ', err);
+      contributors$.reject(err);
+      });
 
-    contributors$.resolve(userContributorStubResponse);
+    // contributors$.resolve(userContributorStubResponse);
     
     return contributors$.promise;
   }
@@ -96,19 +96,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var commitActivity$ = $q.defer();
 
-    // $http({
-    //   method: 'GET',
-    //   accept: 'application/vnd.github.v3+json',
-    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/commit_activity' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    // }).then(function (response) {
-    //   $log.info('[GithubService] Commit Activity API Response', response);
-    //   commitActivity$.resolve(response.data);
-    // }, function (err) {
-    //   $log.error('[GithubService] Commit Activity API Error ', err);
-    //   usercommitActivityRepos$.reject(err);
-    //   });
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/commit_activity' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] Commit Activity API Response', response);
+      commitActivity$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService] Commit Activity API Error ', err);
+      usercommitActivityRepos$.reject(err);
+      });
 
-    commitActivity$.resolve(commitActivityStubResponse);
+    // commitActivity$.resolve(commitActivityStubResponse);
     
     return commitActivity$.promise;
   }
@@ -118,19 +118,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var weeklyAddDel$ = $q.defer();
 
-    // $http({
-    //   method: 'GET',
-    //   accept: 'application/vnd.github.v3+json',
-    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/code_frequency' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    // }).then(function (response) {
-    //   $log.info('[GithubService] Weekly Addition Deletion API Response', response);
-    //   weeklyAddDel$.resolve(response.data);
-    // }, function (err) {
-    //   $log.error('[GithubService] Weekly Addition Deletion API Error ', err);
-    //   weeklyAddDel$.reject(err);
-    //   });
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/code_frequency' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] Weekly Addition Deletion API Response', response);
+      weeklyAddDel$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService] Weekly Addition Deletion API Error ', err);
+      weeklyAddDel$.reject(err);
+      });
 
-    weeklyAddDel$.resolve(weeklyAdditionDeletionStubResponse);
+    // weeklyAddDel$.resolve(weeklyAdditionDeletionStubResponse);
     
     return weeklyAddDel$.promise;
   }
@@ -140,21 +140,43 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var weeklyCommitCount$ = $q.defer();
 
-    // $http({
-    //   method: 'GET',
-    //   accept: 'application/vnd.github.v3+json',
-    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/code_frequency' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    // }).then(function (response) {
-    //   $log.info('[GithubService] Weekly Commit Count API Response', response);
-    //   weeklyCommitCount$.resolve(response.data);
-    // }, function (err) {
-    //   $log.error('[GithubService] Weekly Commit Count API Error ', err);
-    //   weeklyCommitCount$.reject(err);
-    //   });
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/participation' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] Weekly Commit Count API Response', response);
+      weeklyCommitCount$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService] Weekly Commit Count API Error ', err);
+      weeklyCommitCount$.reject(err);
+      });
 
-    weeklyCommitCount$.resolve(weeklyCommitCountStubResponse);
+    // weeklyCommitCount$.resolve(weeklyCommitCountStubResponse);
     
     return weeklyCommitCount$.promise;
+  }
+
+  _getHourlyCommitEachDayAPIResponse = function (userName, repoName) {
+    $log.info('[GithubService] Fetching Hourly Commit Each Day for User = '+ userName + ' Repo = ' + repoName);
+
+    var hourlyCommitEachDayCount$ = $q.defer();
+
+    $http({
+      method: 'GET',
+      accept: 'application/vnd.github.v3+json',
+      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/punch_card' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    }).then(function (response) {
+      $log.info('[GithubService] Hourly Commit Each Day API Response', response);
+      hourlyCommitEachDayCount$.resolve(response.data);
+    }, function (err) {
+      $log.error('[GithubService] Hourly Commit Each Day API Error ', err);
+      hourlyCommitEachDayCount$.reject(err);
+      });
+
+    // hourlyCommitEachDayCount$.resolve(hourlyCommitEachDayStubResponse);
+    
+    return hourlyCommitEachDayCount$.promise;
   }
 
   return {
@@ -165,7 +187,9 @@ app.factory('GithubService', function ($http, $log, $q) {
     getCommitActivityAPIResponse:
       _getCommitActivityAPIResponse,
     getWeeklyAdditionDeletionAPIResponse: _getWeeklyAdditionDeletionAPIResponse,
-    getWeeklyCommitCountAPIResponse: _getWeeklyCommitCountAPIResponse
+    getWeeklyCommitCountAPIResponse: _getWeeklyCommitCountAPIResponse,
+    getHourlyCommitEachDayAPIResponse:
+    _getHourlyCommitEachDayAPIResponse
   }
 
 });
@@ -2167,6 +2191,849 @@ var weeklyCommitCountStubResponse = {
     0
   ]
 };
+
+var hourlyCommitEachDayStubResponse = [
+  [
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    1,
+    0
+  ],
+  [
+    0,
+    2,
+    0
+  ],
+  [
+    0,
+    3,
+    0
+  ],
+  [
+    0,
+    4,
+    0
+  ],
+  [
+    0,
+    5,
+    0
+  ],
+  [
+    0,
+    6,
+    0
+  ],
+  [
+    0,
+    7,
+    0
+  ],
+  [
+    0,
+    8,
+    0
+  ],
+  [
+    0,
+    9,
+    0
+  ],
+  [
+    0,
+    10,
+    0
+  ],
+  [
+    0,
+    11,
+    0
+  ],
+  [
+    0,
+    12,
+    0
+  ],
+  [
+    0,
+    13,
+    0
+  ],
+  [
+    0,
+    14,
+    0
+  ],
+  [
+    0,
+    15,
+    0
+  ],
+  [
+    0,
+    16,
+    0
+  ],
+  [
+    0,
+    17,
+    0
+  ],
+  [
+    0,
+    18,
+    0
+  ],
+  [
+    0,
+    19,
+    0
+  ],
+  [
+    0,
+    20,
+    0
+  ],
+  [
+    0,
+    21,
+    0
+  ],
+  [
+    0,
+    22,
+    0
+  ],
+  [
+    0,
+    23,
+    0
+  ],
+  [
+    1,
+    0,
+    0
+  ],
+  [
+    1,
+    1,
+    0
+  ],
+  [
+    1,
+    2,
+    0
+  ],
+  [
+    1,
+    3,
+    0
+  ],
+  [
+    1,
+    4,
+    0
+  ],
+  [
+    1,
+    5,
+    0
+  ],
+  [
+    1,
+    6,
+    0
+  ],
+  [
+    1,
+    7,
+    0
+  ],
+  [
+    1,
+    8,
+    0
+  ],
+  [
+    1,
+    9,
+    0
+  ],
+  [
+    1,
+    10,
+    0
+  ],
+  [
+    1,
+    11,
+    0
+  ],
+  [
+    1,
+    12,
+    0
+  ],
+  [
+    1,
+    13,
+    0
+  ],
+  [
+    1,
+    14,
+    0
+  ],
+  [
+    1,
+    15,
+    0
+  ],
+  [
+    1,
+    16,
+    0
+  ],
+  [
+    1,
+    17,
+    0
+  ],
+  [
+    1,
+    18,
+    1
+  ],
+  [
+    1,
+    19,
+    0
+  ],
+  [
+    1,
+    20,
+    0
+  ],
+  [
+    1,
+    21,
+    0
+  ],
+  [
+    1,
+    22,
+    0
+  ],
+  [
+    1,
+    23,
+    0
+  ],
+  [
+    2,
+    0,
+    0
+  ],
+  [
+    2,
+    1,
+    0
+  ],
+  [
+    2,
+    2,
+    0
+  ],
+  [
+    2,
+    3,
+    0
+  ],
+  [
+    2,
+    4,
+    0
+  ],
+  [
+    2,
+    5,
+    0
+  ],
+  [
+    2,
+    6,
+    0
+  ],
+  [
+    2,
+    7,
+    0
+  ],
+  [
+    2,
+    8,
+    0
+  ],
+  [
+    2,
+    9,
+    0
+  ],
+  [
+    2,
+    10,
+    0
+  ],
+  [
+    2,
+    11,
+    0
+  ],
+  [
+    2,
+    12,
+    0
+  ],
+  [
+    2,
+    13,
+    0
+  ],
+  [
+    2,
+    14,
+    0
+  ],
+  [
+    2,
+    15,
+    0
+  ],
+  [
+    2,
+    16,
+    0
+  ],
+  [
+    2,
+    17,
+    0
+  ],
+  [
+    2,
+    18,
+    0
+  ],
+  [
+    2,
+    19,
+    0
+  ],
+  [
+    2,
+    20,
+    0
+  ],
+  [
+    2,
+    21,
+    0
+  ],
+  [
+    2,
+    22,
+    0
+  ],
+  [
+    2,
+    23,
+    0
+  ],
+  [
+    3,
+    0,
+    0
+  ],
+  [
+    3,
+    1,
+    0
+  ],
+  [
+    3,
+    2,
+    0
+  ],
+  [
+    3,
+    3,
+    0
+  ],
+  [
+    3,
+    4,
+    0
+  ],
+  [
+    3,
+    5,
+    0
+  ],
+  [
+    3,
+    6,
+    0
+  ],
+  [
+    3,
+    7,
+    0
+  ],
+  [
+    3,
+    8,
+    0
+  ],
+  [
+    3,
+    9,
+    0
+  ],
+  [
+    3,
+    10,
+    0
+  ],
+  [
+    3,
+    11,
+    0
+  ],
+  [
+    3,
+    12,
+    0
+  ],
+  [
+    3,
+    13,
+    0
+  ],
+  [
+    3,
+    14,
+    0
+  ],
+  [
+    3,
+    15,
+    0
+  ],
+  [
+    3,
+    16,
+    0
+  ],
+  [
+    3,
+    17,
+    0
+  ],
+  [
+    3,
+    18,
+    0
+  ],
+  [
+    3,
+    19,
+    0
+  ],
+  [
+    3,
+    20,
+    0
+  ],
+  [
+    3,
+    21,
+    0
+  ],
+  [
+    3,
+    22,
+    0
+  ],
+  [
+    3,
+    23,
+    0
+  ],
+  [
+    4,
+    0,
+    0
+  ],
+  [
+    4,
+    1,
+    0
+  ],
+  [
+    4,
+    2,
+    0
+  ],
+  [
+    4,
+    3,
+    0
+  ],
+  [
+    4,
+    4,
+    0
+  ],
+  [
+    4,
+    5,
+    0
+  ],
+  [
+    4,
+    6,
+    0
+  ],
+  [
+    4,
+    7,
+    0
+  ],
+  [
+    4,
+    8,
+    0
+  ],
+  [
+    4,
+    9,
+    0
+  ],
+  [
+    4,
+    10,
+    0
+  ],
+  [
+    4,
+    11,
+    0
+  ],
+  [
+    4,
+    12,
+    0
+  ],
+  [
+    4,
+    13,
+    0
+  ],
+  [
+    4,
+    14,
+    0
+  ],
+  [
+    4,
+    15,
+    0
+  ],
+  [
+    4,
+    16,
+    0
+  ],
+  [
+    4,
+    17,
+    0
+  ],
+  [
+    4,
+    18,
+    0
+  ],
+  [
+    4,
+    19,
+    0
+  ],
+  [
+    4,
+    20,
+    0
+  ],
+  [
+    4,
+    21,
+    0
+  ],
+  [
+    4,
+    22,
+    0
+  ],
+  [
+    4,
+    23,
+    0
+  ],
+  [
+    5,
+    0,
+    0
+  ],
+  [
+    5,
+    1,
+    0
+  ],
+  [
+    5,
+    2,
+    0
+  ],
+  [
+    5,
+    3,
+    0
+  ],
+  [
+    5,
+    4,
+    0
+  ],
+  [
+    5,
+    5,
+    0
+  ],
+  [
+    5,
+    6,
+    0
+  ],
+  [
+    5,
+    7,
+    0
+  ],
+  [
+    5,
+    8,
+    0
+  ],
+  [
+    5,
+    9,
+    0
+  ],
+  [
+    5,
+    10,
+    0
+  ],
+  [
+    5,
+    11,
+    0
+  ],
+  [
+    5,
+    12,
+    0
+  ],
+  [
+    5,
+    13,
+    0
+  ],
+  [
+    5,
+    14,
+    1
+  ],
+  [
+    5,
+    15,
+    0
+  ],
+  [
+    5,
+    16,
+    0
+  ],
+  [
+    5,
+    17,
+    0
+  ],
+  [
+    5,
+    18,
+    0
+  ],
+  [
+    5,
+    19,
+    0
+  ],
+  [
+    5,
+    20,
+    0
+  ],
+  [
+    5,
+    21,
+    0
+  ],
+  [
+    5,
+    22,
+    0
+  ],
+  [
+    5,
+    23,
+    0
+  ],
+  [
+    6,
+    0,
+    0
+  ],
+  [
+    6,
+    1,
+    0
+  ],
+  [
+    6,
+    2,
+    0
+  ],
+  [
+    6,
+    3,
+    0
+  ],
+  [
+    6,
+    4,
+    0
+  ],
+  [
+    6,
+    5,
+    0
+  ],
+  [
+    6,
+    6,
+    0
+  ],
+  [
+    6,
+    7,
+    0
+  ],
+  [
+    6,
+    8,
+    0
+  ],
+  [
+    6,
+    9,
+    0
+  ],
+  [
+    6,
+    10,
+    0
+  ],
+  [
+    6,
+    11,
+    0
+  ],
+  [
+    6,
+    12,
+    0
+  ],
+  [
+    6,
+    13,
+    0
+  ],
+  [
+    6,
+    14,
+    0
+  ],
+  [
+    6,
+    15,
+    0
+  ],
+  [
+    6,
+    16,
+    0
+  ],
+  [
+    6,
+    17,
+    0
+  ],
+  [
+    6,
+    18,
+    0
+  ],
+  [
+    6,
+    19,
+    0
+  ],
+  [
+    6,
+    20,
+    0
+  ],
+  [
+    6,
+    21,
+    0
+  ],
+  [
+    6,
+    22,
+    0
+  ],
+  [
+    6,
+    23,
+    0
+  ]
+];
 
 var userContributorStubResponse = [
   {
