@@ -160,7 +160,7 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, 
       },
       hAxes: {
         0: {
-          title: 'Week with'
+          title: 'Week'
         }
       }
     };

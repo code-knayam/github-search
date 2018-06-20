@@ -48,7 +48,7 @@ app.factory('ChartingService', function () {
     for (var index in response) {
       var weekDetails = [];
       var date = new Date(response[index][0] * 1000);
-      weekDetails.push(date.toDateString());
+      weekDetails.push(index);
       weekDetails.push(response[index][1]);
       weekDetails.push(response[index][2]);
       operatedResponse.push(weekDetails);
