@@ -7,7 +7,7 @@ app.controller('contributorListChartController', function ($scope, $log, GithubS
     .then(function (response) {
       $log.info('[contributorListChartController] Contributors API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
 
-      if (response.length == 0 || angular.equals(response,{})) {
+      if (response.length == 0 || angular.equals(response, {})) {
         $('#contributor-list-error_' + $scope.repoIndex).fadeIn(100);
         $('#contributor-list-chart_' + $scope.repoIndex).fadeOut(100)
       } else {
@@ -69,8 +69,8 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
   GithubService.getCommitActivityAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[commitActivityChartController] Commit Activity API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-      
-      if (response.length == 0 || angular.equals(response,{})) {
+
+      if (response.length == 0 || angular.equals(response, {})) {
         $('#commit-activity-error_' + $scope.repoIndex).fadeIn(100);
         $('#commit-activity-chart_' + $scope.repoIndex).fadeOut(100)
       } else {
@@ -122,8 +122,8 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, 
   GithubService.getWeeklyAdditionDeletionAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[weeklyAdditionDeletionChartController] Weekly Addition Deletion API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-      
-      if (response.length == 0 || angular.equals(response,{})) {
+
+      if (response.length == 0 || angular.equals(response, {})) {
         $('#weekly-addition-deletion-error_' + $scope.repoIndex).fadeIn(100);
         $('#weekly-addition-deletion-chart_' + $scope.repoIndex).fadeOut(100)
       } else {
@@ -198,7 +198,7 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
     .then(function (response) {
       $log.info('[weeklyCommitCountChartController] Weekly Commit Count API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
 
-      if (response.length == 0 || angular.equals(response,{})) {
+      if (response.length == 0 || angular.equals(response, {})) {
         $('#weekly-commit-count-error_' + $scope.repoIndex).fadeIn(100);
         $('#weekly-commit-count-chart_' + $scope.repoIndex).fadeOut(100)
       } else {
@@ -220,7 +220,7 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
   }
 
   function drawChart() {
-    var response = ChartingService.operateWeeklyCommitCountResponse(apiResponse);    
+    var response = ChartingService.operateWeeklyCommitCountResponse(apiResponse);
     // configuring chart
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Week');
@@ -271,7 +271,7 @@ app.controller('hourlyCommitChartController', function ($scope, $log, GithubServ
     .then(function (response) {
       $log.info('[hourlyCommitChartController] Hourly Commit Each Day API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
 
-      if (response.length == 0 || angular.equals(response,{})) {
+      if (response.length == 0 || angular.equals(response, {})) {
         $('#hourly-commit-error_' + $scope.repoIndex).fadeIn(100);
         $('#hourly-commit-chart_' + $scope.repoIndex).fadeOut(100)
       } else {
