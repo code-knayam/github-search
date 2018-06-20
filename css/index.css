@@ -220,7 +220,7 @@ header nav a:hover {
   border: 3px solid #2699FB;
   margin-bottom: 20px;
 }
-.user-details .user-info h2 {
+.user-details .user-info a {
   font-size: 60px;
   color: #222;  
 }

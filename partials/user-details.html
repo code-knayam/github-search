@@ -4,7 +4,7 @@
 
       <div class="user-info">
         <img class="img-thumbnail img-fluid" ng-src="{{userDetails.avatar_url}}" alt="">
-        <h2>{{userDetails.login}}</h2>
+        <h2><a ng-href="{{userDetails.html_url}}" target="_blank">{{userDetails.login}}</a></h2>
         <span ng-if="userDetails.name" class="extra-info">
           <i class="far fa-user"></i>
           {{userDetails.name}}
@@ -13,9 +13,17 @@
           <i class="far fa-envelope-open"></i>
           {{userDetails.email}}
         </span>        
-        <span ng-if="userRepos" class="extra-info">
+        <span ng-if="userDetails.public_repos != null" class="extra-info">
           <i class="fas fa-code-branch"></i>
           {{userDetails.public_repos}} Repos
+        </span>
+        <span ng-if="userDetails.followers != null" class="extra-info">
+          <i class="fas fa-code-branch"></i>
+          {{userDetails.followers}} Followers
+        </span>
+        <span ng-if="userDetails.following != null" class="extra-info">
+          <i class="fas fa-code-branch"></i>
+          {{userDetails.following}} Following
         </span>
       </div>      
       
