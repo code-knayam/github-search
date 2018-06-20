@@ -42,8 +42,37 @@ app.factory('ChartingService', function () {
     return operatedResponse;
   }
 
+  _operateWeeklyAddDelResponse = function (response) {
+    var operatedResponse = [];
+
+    for (var index in response) {
+      var weekDetails = [];
+      var date = new Date(response[index][0]*1000);
+      weekDetails.push(date.toDateString());
+      weekDetails.push(response[index][1]);
+      weekDetails.push(response[index][2]);
+      operatedResponse.push(weekDetails);
+    }
+    
+    return operatedResponse;
+  }
+
+  _operateWeeklyCommitCountResponse = function (response) {
+    var operatedResponse = [];
+
+    for (var index in response.all) {
+      var commitDetails = [index, 0, 0];      
+      commitDetails[1] += response.all[index];
+      commitDetails[2] += response.owner[index];      
+      operatedResponse.push(commitDetails);
+    }
+    return operatedResponse;
+  }
+
   return {
     operateContributorListResponse: _operateContributorListResponse,
-    operateCommitActivityResponse: _operateCommitActivityResponse
+    operateCommitActivityResponse: _operateCommitActivityResponse,
+    operateWeeklyAddDelResponse: _operateWeeklyAddDelResponse,
+    operateWeeklyCommitCountResponse: _operateWeeklyCommitCountResponse
   }
 })

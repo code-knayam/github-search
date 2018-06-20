@@ -10,7 +10,7 @@ app.controller('contributorListChartController', function ($scope, $log, GithubS
       // calling function to Initialize chart
       initChart();
     }, function (err) {
-      $log.erro('[contributorListChartController] Contributors API Error from Service', response);
+      $log.error('[contributorListChartController] Contributors API Error from Service', err);
     });
 
   function initChart() {
@@ -67,7 +67,7 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
       // calling function to Initialize chart
       initChart();
     }, function (err) {
-      $log.erro('[commitActivityChartController] Commit Activity API Error from Service', response);
+      $log.error('[commitActivityChartController] Commit Activity API Error from Service', err);
     });
 
   function initChart() {
@@ -87,7 +87,7 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
     data.addColumn('string', 'Day');
     data.addColumn('number', 'Total Commits');
     data.addRows(response);
-    
+
     // Setting options for chart
     var options = {
       pieHole: 0.2,
@@ -102,29 +102,41 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
 
 });
 
-app.controller('weeklyAdditionDeletionChartController', function ($scope) {
+app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, GithubService, ChartingService) {
 
-  // Load Charts and the corechart package.
-  google.charts.load('current', {
-    'packages': ['corechart', 'bar']
-  });
+  var apiResponse;
 
-  // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(drawChart);
+  // Calling service function to get API response
+  GithubService.getWeeklyAdditionDeletionAPIResponse($scope.repo.owner.login, $scope.repo.name)
+    .then(function (response) {
+      $log.info('[weeklyAdditionDeletionChartController] Weekly Addition Deletion API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
+      apiResponse = response;
+      // calling function to Initialize chart
+      initChart();
+    }, function (err) {
+      $log.error('[weeklyAdditionDeletionChartController] Weekly Addition Deletion API Error from Service', err);
+    });
+
+  function initChart() {
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart', 'bar']
+    });
+    // Draw the chart when Charts is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+  }
 
   function drawChart() {
+    // Operating on response from API
+    var response = ChartingService.operateWeeklyAddDelResponse(apiResponse);
+    // Configuring chart
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Week');
+    data.addColumn('number', 'Add');
+    data.addColumn('number', 'Del');
+    data.addRows(response);
 
-    var data = google.visualization.arrayToDataTable([
-      ['Week', 'Add ', 'Del '],
-      ['10th June', 1540, 3],
-      ['11th June', 1170, 12],
-      ['12th June', 1540, 149],
-      ['13th June', 1540, 149],
-      ['14th June', 1540, 149],
-      ['15th June', 1030, 39]
-    ]);
-
-
+    // Setting options for chart
     var options = {
       series: {
         0: {
@@ -145,43 +157,78 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope) {
         1: {
           title: 'Deletion'
         }
+      },
+      hAxes: {
+        0: {
+          title: 'Week with'
+        }
       }
     };
-
-
-    var chart = new google.visualization.ColumnChart(document.querySelector('#weekly-addition-deletion-chart_' + $scope.repoIndex));
+    // Drawing Chart
+    var chart = new google.visualization.LineChart(document.querySelector('#weekly-addition-deletion-chart_' + $scope.repoIndex));
     chart.draw(data, options);
   }
 
 });
 
-app.controller('weeklyCommitCountChartController', function ($scope) {
+app.controller('weeklyCommitCountChartController', function ($scope, $log, GithubService, ChartingService) {
 
-  // Load Charts and the corechart package.
-  google.charts.load('current', {
-    'packages': ['corechart']
-  });
+  var apiResponse;
 
-  // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(drawChart);
+  // Calling service function to get API response
+  GithubService.getWeeklyCommitCountAPIResponse($scope.repo.owner.login, $scope.repo.name)
+    .then(function (response) {
+      $log.info('[contributorListChartController] Contributors API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
+      apiResponse = response;
+      // calling function to Initialize chart
+      initChart();
+    }, function (err) {
+      $log.error('[contributorListChartController] Contributors API Error from Service', err);
+    });
+
+  function initChart() {
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    // Draw the chart when Charts is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+  }
 
   function drawChart() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Week', 'All', 'Owner'],
-      ['1', 0, 0],
-      ['2', 3, 1],
-      ['3', 3, 3],
-      ['4', 0, 0]
-    ]);
+    var response = ChartingService.operateWeeklyCommitCountResponse(apiResponse);
+    // configuring chart
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Week');
+    data.addColumn('number', 'All');
+    data.addColumn('number', 'Owner');
+    data.addRows(response);    
 
     var options = {
-      title: 'weekly commit count for the repository',
-      curveType: 'function',
+      series: {
+        0: {
+          targetAxisIndex: 0
+        },
+        1: {
+          targetAxisIndex: 1
+        }
+      },
+      title: 'Weekly Commit Count',
       width: 800,
       height: 400,
-      legend: {
-        position: 'bottom'
+      vAxes: {
+        // Adds titles to each axis.
+        0: {
+          title: 'All'
+        },
+        1: {
+          title: 'owner'
+        }
+      },
+      hAxes: {
+        0: {
+          title: 'Week'
+        }
       }
     };
 

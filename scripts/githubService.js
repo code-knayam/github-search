@@ -28,19 +28,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var userDetails$ = $q.defer();
 
-    $http({
-      method: 'GET',
-      accept: 'application/vnd.github.v3+json',
-      url: 'https://api.github.com/users/' + userName + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    }).then(function (response) {
-      $log.info('[GithubService] User Info API Response', response);
-      userDetails$.resolve(response.data);
-    }, function (err) {
-      $log.error('[GithubService] User Info API Error ', err);
-      userDetails$.reject(err);
-      });
+    // $http({
+    //   method: 'GET',
+    //   accept: 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/users/' + userName + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] User Info API Response', response);
+    //   userDetails$.resolve(response.data);
+    // }, function (err) {
+    //   $log.error('[GithubService] User Info API Error ', err);
+    //   userDetails$.reject(err);
+    //   });
     
-    // userDetails$.resolve(userDetailsStubResponse);
+    userDetails$.resolve(userDetailsStubResponse);
 
     return userDetails$.promise;
   }
@@ -51,19 +51,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var userRepos$ = $q.defer();
 
-    $http({
-      method: 'GET',
-      accept: 'application/vnd.github.v3+json',
-      url: 'https://api.github.com/users/' + userName + '/repos' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    }).then(function (response) {
-      $log.info('[GithubService] User Repos API Response', response);
-      userRepos$.resolve(response.data);
-    }, function (err) {
-      $log.error('[GithubService]  User Repos API Error ', err);
-      userRepos$.reject(err);
-      });
+    // $http({
+    //   method: 'GET',
+    //   accept: 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/users/' + userName + '/repos' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] User Repos API Response', response);
+    //   userRepos$.resolve(response.data);
+    // }, function (err) {
+    //   $log.error('[GithubService]  User Repos API Error ', err);
+    //   userRepos$.reject(err);
+    //   });
 
-    // userRepos$.resolve(userReposStubResponse);
+    userRepos$.resolve(userReposStubResponse);
     
     return userRepos$.promise;
   };
@@ -74,19 +74,19 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var contributors$ = $q.defer();
 
-    $http({
-      method: 'GET',
-      accept: 'application/vnd.github.v3+json',
-      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/contributors' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    }).then(function (response) {
-      $log.info('[GithubService] Contributors API Response', response);
-      contributors$.resolve(response.data);
-    }, function (err) {
-      $log.error('[GithubService]  Contributors API Error ', err);
-      contributors$.reject(err);
-      });
+    // $http({
+    //   method: 'GET',
+    //   accept: 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/contributors' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] Contributors API Response', response);
+    //   contributors$.resolve(response.data);
+    // }, function (err) {
+    //   $log.error('[GithubService]  Contributors API Error ', err);
+    //   contributors$.reject(err);
+    //   });
 
-    // contributors$.resolve(userContributorStubResponse);
+    contributors$.resolve(userContributorStubResponse);
     
     return contributors$.promise;
   }
@@ -96,21 +96,65 @@ app.factory('GithubService', function ($http, $log, $q) {
 
     var commitActivity$ = $q.defer();
 
-    $http({
-      method: 'GET',
-      accept: 'application/vnd.github.v3+json',
-      url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/commit_activity' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
-    }).then(function (response) {
-      $log.info('[GithubService] Commit Activity API Response', response);
-      commitActivity$.resolve(response.data);
-    }, function (err) {
-      $log.error('[GithubService] Commit Activity API Error ', err);
-      usercommitActivityRepos$.reject(err);
-      });
+    // $http({
+    //   method: 'GET',
+    //   accept: 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/commit_activity' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] Commit Activity API Response', response);
+    //   commitActivity$.resolve(response.data);
+    // }, function (err) {
+    //   $log.error('[GithubService] Commit Activity API Error ', err);
+    //   usercommitActivityRepos$.reject(err);
+    //   });
 
-    // commitActivity$.resolve(commitActivityStubResponse);
+    commitActivity$.resolve(commitActivityStubResponse);
     
     return commitActivity$.promise;
+  }
+
+  _getWeeklyAdditionDeletionAPIResponse = function (userName, repoName) {
+    $log.info('[GithubService] Fetching Weekly Addition Deletion for User = '+ userName + ' Repo = ' + repoName);
+
+    var weeklyAddDel$ = $q.defer();
+
+    // $http({
+    //   method: 'GET',
+    //   accept: 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/code_frequency' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] Weekly Addition Deletion API Response', response);
+    //   weeklyAddDel$.resolve(response.data);
+    // }, function (err) {
+    //   $log.error('[GithubService] Weekly Addition Deletion API Error ', err);
+    //   weeklyAddDel$.reject(err);
+    //   });
+
+    weeklyAddDel$.resolve(weeklyAdditionDeletionStubResponse);
+    
+    return weeklyAddDel$.promise;
+  }
+
+  _getWeeklyCommitCountAPIResponse = function (userName, repoName) {
+    $log.info('[GithubService] Fetching Weekly Commit Count for User = '+ userName + ' Repo = ' + repoName);
+
+    var weeklyCommitCount$ = $q.defer();
+
+    // $http({
+    //   method: 'GET',
+    //   accept: 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/code_frequency' + '?client_id=a8f668093078fab675d7&client_secret=6db1684b289e0979bb41a0a18f943f79dc192100'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] Weekly Commit Count API Response', response);
+    //   weeklyCommitCount$.resolve(response.data);
+    // }, function (err) {
+    //   $log.error('[GithubService] Weekly Commit Count API Error ', err);
+    //   weeklyCommitCount$.reject(err);
+    //   });
+
+    weeklyCommitCount$.resolve(weeklyCommitCountStubResponse);
+    
+    return weeklyCommitCount$.promise;
   }
 
   return {
@@ -119,7 +163,9 @@ app.factory('GithubService', function ($http, $log, $q) {
     getUserRepos: _getUserRepos,
     getContributorsAPIResponse: _getContributorsAPIResponse,
     getCommitActivityAPIResponse:
-    _getCommitActivityAPIResponse
+      _getCommitActivityAPIResponse,
+    getWeeklyAdditionDeletionAPIResponse: _getWeeklyAdditionDeletionAPIResponse,
+    getWeeklyCommitCountAPIResponse: _getWeeklyCommitCountAPIResponse
   }
 
 });
@@ -1997,6 +2043,130 @@ var commitActivityStubResponse = [
     "week": 1529193600
   }
 ];
+
+var weeklyAdditionDeletionStubResponse = [
+  [
+    1528588800,
+    23,
+    0
+  ],
+  [
+    1529193600,
+    3397,
+    -7
+  ]
+];
+
+var weeklyCommitCountStubResponse = {
+  "all": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+  ],
+  "owner": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+};
 
 var userContributorStubResponse = [
   {
