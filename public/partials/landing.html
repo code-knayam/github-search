@@ -10,9 +10,6 @@
             <div class="col-md-4 offset-4">
               <div class="form-group">
                 <input type="text" class="form-control" name="userName" ng-model="userName" placeholder="User Name" required autocomplete="off">
-                <!-- <label 
-                  for="userName"
-                  ng-class="searchUserForm.userName.$dirty && searchUserForm.userName.$viewValue != '' ? 'active-label' : '';">User Name</label> -->
               </div>
               <button class="btn btn-primary" ng-class="searchUserForm.$valid ? 'active-btn' : 'inactive-btn' " ng-click="onSubmit()" ng-disabled="searchUserForm.$invalid">
                 <span ng-if="showSpinner">
@@ -53,24 +50,6 @@
           </div>
 
         </div>
-        <!-- <div class="table-responsive">
-
-          <table class="table" id="userData">
-            <tbody>
-              <tr ng-repeat="user in users">
-                <td>
-                  <img class=" img-thumbnail img-fluid user-avatar" ng-src="{{user.avatar_url}}" alt="">
-                </td>
-                <td>
-                  <p ng-bind="user.login"></p>
-                </td>
-                <td>
-                  <a ng-click="onViewDetails(user.login)">View Profile</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
       </div>
     </div>
 
