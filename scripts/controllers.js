@@ -1,4 +1,4 @@
-app.controller('searchUserController', function ($scope, $log, $location, GithubService, SpinnerService) {
+app.controller('searchUserController', function ($scope, $log, $location, GithubService) {
 
   $scope.onSubmit = function () {
 
