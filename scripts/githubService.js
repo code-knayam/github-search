@@ -68,10 +68,58 @@ app.factory('GithubService', function ($http, $log, $q) {
     return userRepos$.promise;
   };
 
+  // API call to fetch Contributors API response for a repo
+  _getContributorsAPIResponse = function (userName, repoName) {
+    $log.info('[GithubService] Fetching Contributors for User = '+ userName + ' Repo = ' + repoName);
+
+    var contributors$ = $q.defer();
+
+    // $http({
+    //   method: 'GET',
+    //   'accept': 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/contributors'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] Contributors API Response', response);
+    //   contributors$.resolve(response);
+    // }, function (err) {
+    //   $log.error('[GithubService]  Contributors API Error ', err);
+    //   contributors$.reject(err);
+    //   });
+
+    contributors$.resolve(userContributorStubResponse);
+    
+    return contributors$.promise;
+  }
+
+  _getCommitActivityAPIResponse = function (userName, repoName) {
+    $log.info('[GithubService] Fetching Commit Activity for User = '+ userName + ' Repo = ' + repoName);
+
+    var commitActivity$ = $q.defer();
+
+    // $http({
+    //   method: 'GET',
+    //   'accept': 'application/vnd.github.v3+json',
+    //   url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/stats/commit_activity'
+    // }).then(function (response) {
+    //   $log.info('[GithubService] Commit Activity API Response', response);
+    //   commitActivity$.resolve(response);
+    // }, function (err) {
+    //   $log.error('[GithubService] Commit Activity API Error ', err);
+    //   usercommitActivityRepos$.reject(err);
+    //   });
+
+    commitActivity$.resolve(commitActivityStubResponse);
+    
+    return commitActivity$.promise;
+  }
+
   return {
     getUserList: _getUserList,
     getUserInfo: _getUserInfo,
-    getUserRepos: _getUserRepos
+    getUserRepos: _getUserRepos,
+    getContributorsAPIResponse: _getContributorsAPIResponse,
+    getCommitActivityAPIResponse:
+    _getCommitActivityAPIResponse
   }
 
 });
@@ -1268,5 +1316,761 @@ var userReposStubResponse = [
     "open_issues": 0,
     "watchers": 0,
     "default_branch": "master"
+  }
+];
+
+var commitActivityStubResponse = [
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1498348800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1498953600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1499558400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1500163200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1500768000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1501372800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1501977600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1502582400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1503187200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1503792000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1504396800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1505001600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1505606400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1506211200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1506816000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1507420800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1508025600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1508630400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1509235200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1509840000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1510448400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1511053200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1511658000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1512262800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1512867600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1513472400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1514077200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1514682000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1515286800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1515891600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1516496400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1517101200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1517706000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1518310800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1518915600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1519520400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1520125200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1520730000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1521331200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1521936000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1522540800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1523145600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1523750400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1524355200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1524960000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1525564800
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1526169600
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1526774400
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1527379200
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 0,
+    "week": 1527984000
+  },
+  {
+    "days": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "total": 1,
+    "week": 1528588800
+  },
+  {
+    "days": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "total": 1,
+    "week": 1529193600
+  }
+];
+
+var userContributorStubResponse = [
+  {
+    "total": 1,
+    "weeks": [
+      {
+        "w": 1528588800,
+        "a": 0,
+        "d": 0,
+        "c": 0
+      },
+      {
+        "w": 1529193600,
+        "a": 3397,
+        "d": 7,
+        "c": 1
+      }
+    ],
+    "author": {
+      "login": "harshalc",
+      "id": 4576620,
+      "node_id": "MDQ6VXNlcjQ1NzY2MjA=",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4576620?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/harshalc",
+      "html_url": "https://github.com/harshalc",
+      "followers_url": "https://api.github.com/users/harshalc/followers",
+      "following_url": "https://api.github.com/users/harshalc/following{/other_user}",
+      "gists_url": "https://api.github.com/users/harshalc/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/harshalc/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/harshalc/subscriptions",
+      "organizations_url": "https://api.github.com/users/harshalc/orgs",
+      "repos_url": "https://api.github.com/users/harshalc/repos",
+      "events_url": "https://api.github.com/users/harshalc/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/harshalc/received_events",
+      "type": "User",
+      "site_admin": false
+    }
+  },
+  {
+    "total": 1,
+    "weeks": [
+      {
+        "w": 1528588800,
+        "a": 23,
+        "d": 0,
+        "c": 1
+      },
+      {
+        "w": 1529193600,
+        "a": 0,
+        "d": 0,
+        "c": 0
+      }
+    ],
+    "author": {
+      "login": "anit",
+      "id": 1629898,
+      "node_id": "MDQ6VXNlcjE2Mjk4OTg=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1629898?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/anit",
+      "html_url": "https://github.com/anit",
+      "followers_url": "https://api.github.com/users/anit/followers",
+      "following_url": "https://api.github.com/users/anit/following{/other_user}",
+      "gists_url": "https://api.github.com/users/anit/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/anit/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/anit/subscriptions",
+      "organizations_url": "https://api.github.com/users/anit/orgs",
+      "repos_url": "https://api.github.com/users/anit/repos",
+      "events_url": "https://api.github.com/users/anit/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/anit/received_events",
+      "type": "User",
+      "site_admin": false
+    }
   }
 ];

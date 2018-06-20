@@ -1,60 +1,88 @@
-app.controller('contributorListChartController', function ($scope) {
+app.controller('contributorListChartController', function ($scope, $log, GithubService, ChartingService) {
 
-  // Load Charts and the corechart package.
-  google.charts.load('current', {
-    'packages': ['corechart']
-  });
+  var apiResponse;
 
-  // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(contributorListChart);
+  // Calling service function to get API response
+  GithubService.getContributorsAPIResponse($scope.repo.owner.login, $scope.repo.name)
+    .then(function (response) {
+      $log.info('[contributorListChartController] Contributors API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
+      apiResponse = response;
+      // calling function to Initialize chart
+      initChart();
+    }, function (err) {
+      $log.erro('[contributorListChartController] Contributors API Error from Service', response);
+    });
 
-  function contributorListChart() {
-    
+  function initChart() {
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    // Draw the chart when Charts is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+  }
+
+  function drawChart() {
+    // Operating on response from API
+    var response = ChartingService.operateContributorListResponse(apiResponse);
+    // Configuring chart
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Contributor');
     data.addColumn('number', 'Total Commits');
-    data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
-    data.addRows([
-      ['harshalc', 1, createCustomTooltipContent('harshalc', 1)],
-      ['anit', 1, createCustomTooltipContent('anit', 1)]
-    ]);
+    data.addColumn({
+      'type': 'string',
+      'role': 'tooltip',
+      'p': {
+        'html': true
+      }
+    });
+    data.addRows(response);
 
-    
+    // setting options for chart
     var options = {
-      title: 'Contributor List',      
+      title: 'Contributor List',
       is3D: true,
       width: 800,
       height: 400,
-      tooltip: { isHtml: true }
+      tooltip: {
+        isHtml: true
+      }
     };
-
-    
-    var chart = new google.visualization.PieChart(document.querySelector('#contributor-list-chart_'+ $scope.repoIndex ));
+    // Drawing chart
+    var chart = new google.visualization.PieChart(document.querySelector('#contributor-list-chart_' + $scope.repoIndex));
     chart.draw(data, options);
-  }
-
-  function createCustomTooltipContent(name, value) {
-    return '<div style="width:100px;height:50px;padding:3px;border:none;text-align:left">' +
-      '<img src="https://avatars2.githubusercontent.com/u/4576620?v=4" style = "width:20px; height:20px; border-radius: 1000px; border:1px solid #2699FB;">'
-      + '<h6 style = "font-size:11px; display:inline; margin:2px;padding-left:3px">'+ name + '</h6 >'
-      + '<p style="font-size:9px;padding:5px"><strong>' + value + ' Commits</strong></p>'
-      + '</div> ';
   }
 
 });
 
-app.controller('commitActivityChartController', function ($scope) {
+app.controller('commitActivityChartController', function ($scope, $log, GithubService, ChartingService) {
 
-  // Load Charts and the corechart package.
-  google.charts.load('current', {
-    'packages': ['corechart']
-  });
+  var apiResponse;
 
-  // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(contributorListChart);
+  // Calling service function to get API response
+  GithubService.getCommitActivityAPIResponse($scope.repo.owner.login, $scope.repo.name)
+    .then(function (response) {
+      $log.info('[commitActivityChartController] Commit Activity API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
+      apiResponse = response;
+      // calling function to Initialize chart
+      initChart();
+    }, function (err) {
+      $log.erro('[commitActivityChartController] Commit Activity API Error from Service', response);
+    });
 
-  function contributorListChart() {
+  function initChart() {
+    // Load Charts and the corechart package.
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    // Draw the chart when Charts is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+  }
+
+  function drawChart() {
+    // Operating on response from API
     
+    // Configuring chart
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Day');
     data.addColumn('number', 'Total Commits');
@@ -64,21 +92,20 @@ app.controller('commitActivityChartController', function ($scope) {
       ['Tuesday', 26],
       ['Wednesday', 20],
       ['Thursday', 39],
-      ['Friday', 1],      
-      ['Saturday', 0]      
+      ['Friday', 1],
+      ['Saturday', 0]
     ]);
 
     var total_commits = 89;
+    // Setting options for chart
     var options = {
-      title: 'Last Year Commit Activity ( Total ' + total_commits + ' commits)',
       pieHole: 0.2,
       width: 800,
       height: 400,
       sliceVisibilityThreshold: 0
     };
-
-
-    var chart = new google.visualization.PieChart(document.querySelector('#commit-activity-chart_'+ $scope.repoIndex ));
+    // Drawing chart
+    var chart = new google.visualization.PieChart(document.querySelector('#commit-activity-chart_' + $scope.repoIndex));
     chart.draw(data, options);
   }
 
@@ -87,13 +114,15 @@ app.controller('commitActivityChartController', function ($scope) {
 app.controller('weeklyAdditionDeletionChartController', function ($scope) {
 
   // Load Charts and the corechart package.
-  google.charts.load('current', {'packages':['corechart', 'bar']});
+  google.charts.load('current', {
+    'packages': ['corechart', 'bar']
+  });
 
   // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(contributorListChart);
+  google.charts.setOnLoadCallback(drawChart);
 
-  function contributorListChart() {
-    
+  function drawChart() {
+
     var data = google.visualization.arrayToDataTable([
       ['Week', 'Add ', 'Del '],
       ['10th June', 1540, 3],
@@ -104,24 +133,32 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope) {
       ['15th June', 1030, 39]
     ]);
 
-    
+
     var options = {
       series: {
-        0: {targetAxisIndex: 0},
-        1: {targetAxisIndex: 1}
+        0: {
+          targetAxisIndex: 0
+        },
+        1: {
+          targetAxisIndex: 1
+        }
       },
       title: 'Weekly addition and deletion',
       width: 800,
       height: 400,
       vAxes: {
         // Adds titles to each axis.
-        0: {title: 'Addition'},
-        1: {title: 'Deletion'}
+        0: {
+          title: 'Addition'
+        },
+        1: {
+          title: 'Deletion'
+        }
       }
     };
 
 
-    var chart = new  google.visualization.ColumnChart(document.querySelector('#weekly-addition-deletion-chart_'+ $scope.repoIndex ));
+    var chart = new google.visualization.ColumnChart(document.querySelector('#weekly-addition-deletion-chart_' + $scope.repoIndex));
     chart.draw(data, options);
   }
 
@@ -135,27 +172,29 @@ app.controller('weeklyCommitCountChartController', function ($scope) {
   });
 
   // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(contributorListChart);
+  google.charts.setOnLoadCallback(drawChart);
 
-  function contributorListChart() {
-        
-      var data = google.visualization.arrayToDataTable([
-        ['Week', 'All', 'Owner'],
-        ['1',  0,      0],
-        ['2',  3,      1],
-        ['3',  3,       3],
-        ['4',  0,      0]
-      ]);
+  function drawChart() {
 
-      var options = {
-        title: 'weekly commit count for the repository',
-        curveType: 'function',
-        width: 800,
-        height: 400,
-        legend: { position: 'bottom' }
-      };
+    var data = google.visualization.arrayToDataTable([
+      ['Week', 'All', 'Owner'],
+      ['1', 0, 0],
+      ['2', 3, 1],
+      ['3', 3, 3],
+      ['4', 0, 0]
+    ]);
 
-    var chart = new google.visualization.LineChart(document.querySelector('#weekly-commit-count-chart_'+ $scope.repoIndex ));
+    var options = {
+      title: 'weekly commit count for the repository',
+      curveType: 'function',
+      width: 800,
+      height: 400,
+      legend: {
+        position: 'bottom'
+      }
+    };
+
+    var chart = new google.visualization.LineChart(document.querySelector('#weekly-commit-count-chart_' + $scope.repoIndex));
     chart.draw(data, options);
   }
 
@@ -169,12 +208,14 @@ app.controller('hourlyCommitChartController', function ($scope) {
   });
 
   // Draw the pie chart for Contributor List when Charts is loaded.
-  google.charts.setOnLoadCallback(contributorListChart);
+  google.charts.setOnLoadCallback(drawChart);
 
-  function contributorListChart() {
-    
+  function drawChart() {
+
     var data = google.visualization.arrayToDataTable([
-      ['Hours', '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM', '7:00 AM', '8:00 AM', { role: 'annotation' } ],
+      ['Hours', '1:00 AM', '2:00 AM', '3:00 AM', '4:00 AM', '5:00 AM', '6:00 AM', '7:00 AM', '8:00 AM', {
+        role: 'annotation'
+      }],
       ['Sunday', 10, 24, 20, 32, 18, 5, 2, 2, ''],
       ['Monday', 16, 22, 23, 30, 16, 9, 3, 4, ''],
       ['Tuesday', 28, 19, 29, 30, 12, 13, 6, 8, ''],
@@ -186,15 +227,19 @@ app.controller('hourlyCommitChartController', function ($scope) {
 
     var options = {
       title: 'Number of Commits per hour in each day of week',
-      legend: { position: 'top'},
-      bar: { groupWidth: '50%' },
+      legend: {
+        position: 'top'
+      },
+      bar: {
+        groupWidth: '50%'
+      },
       width: 800,
       height: 400,
       isStacked: true,
       legend: false
     };
 
-    var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_'+ $scope.repoIndex ));
+    var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_' + $scope.repoIndex));
     chart.draw(data, options);
   }
 
