@@ -13,15 +13,15 @@
           <i class="far fa-envelope-open"></i>
           {{userDetails.email}}
         </span>        
-        <span ng-if="repos" class="extra-info">
+        <span ng-if="userRepos" class="extra-info">
           <i class="fas fa-code-branch"></i>
-          {{repos.length}} Repos
+          {{userRepos.length}} Repos
         </span>
 
       </div>      
       
       <div class="repo-list">
-        <div class="repo-item" ng-repeat="repo in repos">          
+        <div class="repo-item" ng-repeat="repo in userRepos">          
           <div repo-detials-directive repo="repo"></div>
         </div>
       </div>
