@@ -317,6 +317,25 @@ header nav a:hover {
 .chart-container .chart-info p {
   font-size: 14px;
   color: #555;
+  margin-bottom: 3px;  
+}
+.chart-container .chart-info .info {
+  font-size: 11px;
+  padding: 0;
+  margin: 0;
+  color: #999;
+}
+.chart-container .chart-info .error {
+  display: none;  
+  margin-top: 35px;
+}
+.chart-container .chart-info .error h6 {
+  font-size: 16px;
+  color: rgb(177, 100, 100);
+}
+.chart-container .chart-info .error p {
+  font-size: 12px;
+  color: rgb(177, 100, 100);
 }
 
 /* -------------------------------- */
