@@ -15,14 +15,13 @@
         </span>        
         <span ng-if="userRepos" class="extra-info">
           <i class="fas fa-code-branch"></i>
-          {{userRepos.length}} Repos
+          {{userDetails.public_repos}} Repos
         </span>
-
       </div>      
       
       <div class="repo-list">
-        <div class="repo-item" ng-repeat="repo in userRepos">          
-          <div repo-detials-directive repo="repo"></div>
+        <div class="repo-item" ng-repeat="repo in userRepos track by $index">
+          <repo-detials-directive repo="repo" repo-index="{{$index}}"></repo-detials-directive>
         </div>
       </div>
     </div>    

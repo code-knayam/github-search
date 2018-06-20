@@ -29,7 +29,7 @@ app.controller('contributorListChartController', function ($scope) {
     };
 
     
-    var chart = new google.visualization.PieChart(document.querySelector('#contributor-list-chart_'+ $scope.repo.name ));
+    var chart = new google.visualization.PieChart(document.querySelector('#contributor-list-chart_'+ $scope.repoIndex ));
     chart.draw(data, options);
   }
 
@@ -78,7 +78,7 @@ app.controller('commitActivityChartController', function ($scope) {
     };
 
 
-    var chart = new google.visualization.PieChart(document.querySelector('#commit-activity-chart_'+ $scope.repo.name ));
+    var chart = new google.visualization.PieChart(document.querySelector('#commit-activity-chart_'+ $scope.repoIndex ));
     chart.draw(data, options);
   }
 
@@ -121,7 +121,7 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope) {
     };
 
 
-    var chart = new  google.visualization.ColumnChart(document.querySelector('#weekly-addition-deletion-chart_'+ $scope.repo.name ));
+    var chart = new  google.visualization.ColumnChart(document.querySelector('#weekly-addition-deletion-chart_'+ $scope.repoIndex ));
     chart.draw(data, options);
   }
 
@@ -155,7 +155,7 @@ app.controller('weeklyCommitCountChartController', function ($scope) {
         legend: { position: 'bottom' }
       };
 
-    var chart = new google.visualization.LineChart(document.querySelector('#weekly-commit-count-chart_'+ $scope.repo.name ));
+    var chart = new google.visualization.LineChart(document.querySelector('#weekly-commit-count-chart_'+ $scope.repoIndex ));
     chart.draw(data, options);
   }
 
@@ -194,7 +194,7 @@ app.controller('hourlyCommitChartController', function ($scope) {
       legend: false
     };
 
-    var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_'+ $scope.repo.name ));
+    var chart = new google.visualization.BarChart(document.querySelector('#hourly-commit-chart_'+ $scope.repoIndex ));
     chart.draw(data, options);
   }
 
