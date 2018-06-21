@@ -1,16 +1,21 @@
 app.controller('contributorListChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
-
-  // Calling service function to get API response
-  GithubService.getContributorsAPIResponse($scope.repo.owner.login, $scope.repo.name)
+  callApi();
+  function callApi() {
+  
+    // Calling service function to get API response
+    GithubService.getContributorsAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[contributorListChartController] Contributors API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-
+      
       if (response.length == 0 || angular.equals(response, {})) {
         $('#contributor-list-error_' + $scope.repoIndex).fadeIn(100);
-        $('#contributor-list-chart_' + $scope.repoIndex).fadeOut(100)
+        $('#contributor-list-chart_' + $scope.repoIndex).fadeOut(100);
+        callApi();
       } else {
+        $('#contributor-list-error_' + $scope.repoIndex).fadeOut(100);
+        $('#contributor-list-chart_' + $scope.repoIndex).fadeIn(100);
         apiResponse = response;
         // calling function to Initialize chart
         initChart();
@@ -18,6 +23,7 @@ app.controller('contributorListChartController', function ($scope, $log, GithubS
     }, function (err) {
       $log.error('[contributorListChartController] Contributors API Error from Service', err);
     });
+  }
 
   function initChart() {
     // Load Charts and the corechart package.
@@ -64,16 +70,22 @@ app.controller('contributorListChartController', function ($scope, $log, GithubS
 app.controller('commitActivityChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  callApi();
 
-  // Calling service function to get API response
-  GithubService.getCommitActivityAPIResponse($scope.repo.owner.login, $scope.repo.name)
+  function callApi() {
+
+    // Calling service function to get API response
+    GithubService.getCommitActivityAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[commitActivityChartController] Commit Activity API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-
+      
       if (response.length == 0 || angular.equals(response, {})) {
         $('#commit-activity-error_' + $scope.repoIndex).fadeIn(100);
-        $('#commit-activity-chart_' + $scope.repoIndex).fadeOut(100)
+        $('#commit-activity-chart_' + $scope.repoIndex).fadeOut(100);
+        callApi();
       } else {
+        $('#commit-activity-error_' + $scope.repoIndex).fadeOut(100);
+        $('#commit-activity-chart_' + $scope.repoIndex).fadeIn(100);
         apiResponse = response;
         // calling function to Initialize chart
         initChart();
@@ -81,6 +93,7 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
     }, function (err) {
       $log.error('[commitActivityChartController] Commit Activity API Error from Service', err);
     });
+  }
 
   function initChart() {
     // Load Charts and the corechart package.
@@ -117,16 +130,22 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
 app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  callApi();
 
-  // Calling service function to get API response
-  GithubService.getWeeklyAdditionDeletionAPIResponse($scope.repo.owner.login, $scope.repo.name)
+  function callApi() {
+  
+    // Calling service function to get API response
+    GithubService.getWeeklyAdditionDeletionAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[weeklyAdditionDeletionChartController] Weekly Addition Deletion API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-
+      
       if (response.length == 0 || angular.equals(response, {})) {
         $('#weekly-addition-deletion-error_' + $scope.repoIndex).fadeIn(100);
-        $('#weekly-addition-deletion-chart_' + $scope.repoIndex).fadeOut(100)
+        $('#weekly-addition-deletion-chart_' + $scope.repoIndex).fadeOut(100);
+        callApi();
       } else {
+        $('#weekly-addition-deletion-error_' + $scope.repoIndex).fadeOut(100);
+        $('#weekly-addition-deletion-chart_' + $scope.repoIndex).fadeIn(100);
         apiResponse = response;
         // calling function to Initialize chart
         initChart();
@@ -134,7 +153,8 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, 
     }, function (err) {
       $log.error('[weeklyAdditionDeletionChartController] Weekly Addition Deletion API Error from Service', err);
     });
-
+  }
+    
   function initChart() {
     // Load Charts and the corechart package.
     google.charts.load('current', {
@@ -192,16 +212,22 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, 
 app.controller('weeklyCommitCountChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  callApi();
 
-  // Calling service function to get API response
-  GithubService.getWeeklyCommitCountAPIResponse($scope.repo.owner.login, $scope.repo.name)
+  function callApi() {
+
+    // Calling service function to get API response
+    GithubService.getWeeklyCommitCountAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[weeklyCommitCountChartController] Weekly Commit Count API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-
+      
       if (response.length == 0 || angular.equals(response, {})) {
         $('#weekly-commit-count-error_' + $scope.repoIndex).fadeIn(100);
-        $('#weekly-commit-count-chart_' + $scope.repoIndex).fadeOut(100)
+        $('#weekly-commit-count-chart_' + $scope.repoIndex).fadeOut(100);
+        callApi();
       } else {
+        $('#weekly-commit-count-error_' + $scope.repoIndex).fadeOut(100);
+        $('#weekly-commit-count-chart_' + $scope.repoIndex).fadeIn(100);
         apiResponse = response;
         // calling function to Initialize chart
         initChart();
@@ -209,6 +235,7 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
     }, function (err) {
       $log.error('[weeklyCommitCountChartController] Weekly Commit Count API Error from Service', err);
     });
+  }
 
   function initChart() {
     // Load Charts and the corechart package.
@@ -265,16 +292,22 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
 app.controller('hourlyCommitChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  callApi();
 
-  // Calling service function to get API response
-  GithubService.getHourlyCommitEachDayAPIResponse($scope.repo.owner.login, $scope.repo.name)
+  function callApi() {
+
+    // Calling service function to get API response
+    GithubService.getHourlyCommitEachDayAPIResponse($scope.repo.owner.login, $scope.repo.name)
     .then(function (response) {
       $log.info('[hourlyCommitChartController] Hourly Commit Each Day API Response for ' + $scope.repo.owner.login + ' ' + $scope.repo.name + ' from Service', response);
-
+      
       if (response.length == 0 || angular.equals(response, {})) {
         $('#hourly-commit-error_' + $scope.repoIndex).fadeIn(100);
-        $('#hourly-commit-chart_' + $scope.repoIndex).fadeOut(100)
+        $('#hourly-commit-chart_' + $scope.repoIndex).fadeOut(100);
+        callApi();
       } else {
+        $('#hourly-commit-error_' + $scope.repoIndex).fadeOut(100);
+        $('#hourly-commit-chart_' + $scope.repoIndex).fadeIn(100);
         apiResponse = response;
         // calling function to Initialize chart
         initChart();
@@ -282,7 +315,8 @@ app.controller('hourlyCommitChartController', function ($scope, $log, GithubServ
     }, function (err) {
       $log.error('[hourlyCommitChartController] Hourly Commit Each Day API Error from Service', err);
     });
-
+  }
+    
   function initChart() {
     // Load Charts and the corechart package.
     google.charts.load('current', {
