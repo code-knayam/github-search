@@ -1,6 +1,7 @@
 app.controller('contributorListChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  var counter = 0;
   callApi();
   function callApi() {
   
@@ -12,7 +13,10 @@ app.controller('contributorListChartController', function ($scope, $log, GithubS
       if (response.length == 0 || angular.equals(response, {})) {
         $('#contributor-list-error_' + $scope.repoIndex).fadeIn(100);
         $('#contributor-list-chart_' + $scope.repoIndex).fadeOut(100);
-        callApi();
+        counter++;
+        if (counter < 5) {
+          callApi();          
+        }
       } else {
         $('#contributor-list-error_' + $scope.repoIndex).fadeOut(100);
         $('#contributor-list-chart_' + $scope.repoIndex).fadeIn(100);
@@ -70,6 +74,7 @@ app.controller('contributorListChartController', function ($scope, $log, GithubS
 app.controller('commitActivityChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  var counter = 0;
   callApi();
 
   function callApi() {
@@ -82,7 +87,10 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
       if (response.length == 0 || angular.equals(response, {})) {
         $('#commit-activity-error_' + $scope.repoIndex).fadeIn(100);
         $('#commit-activity-chart_' + $scope.repoIndex).fadeOut(100);
-        callApi();
+        counter++;
+        if (counter < 5) {
+          callApi();          
+        }
       } else {
         $('#commit-activity-error_' + $scope.repoIndex).fadeOut(100);
         $('#commit-activity-chart_' + $scope.repoIndex).fadeIn(100);
@@ -130,6 +138,7 @@ app.controller('commitActivityChartController', function ($scope, $log, GithubSe
 app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  var counter = 0;
   callApi();
 
   function callApi() {
@@ -142,7 +151,10 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, 
       if (response.length == 0 || angular.equals(response, {})) {
         $('#weekly-addition-deletion-error_' + $scope.repoIndex).fadeIn(100);
         $('#weekly-addition-deletion-chart_' + $scope.repoIndex).fadeOut(100);
-        callApi();
+        counter++;
+        if (counter < 5) {
+          callApi();          
+        }
       } else {
         $('#weekly-addition-deletion-error_' + $scope.repoIndex).fadeOut(100);
         $('#weekly-addition-deletion-chart_' + $scope.repoIndex).fadeIn(100);
@@ -212,6 +224,7 @@ app.controller('weeklyAdditionDeletionChartController', function ($scope, $log, 
 app.controller('weeklyCommitCountChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  var counter = 0;
   callApi();
 
   function callApi() {
@@ -224,7 +237,10 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
       if (response.length == 0 || angular.equals(response, {})) {
         $('#weekly-commit-count-error_' + $scope.repoIndex).fadeIn(100);
         $('#weekly-commit-count-chart_' + $scope.repoIndex).fadeOut(100);
-        callApi();
+        counter++;
+        if (counter < 5) {
+          callApi();          
+        }
       } else {
         $('#weekly-commit-count-error_' + $scope.repoIndex).fadeOut(100);
         $('#weekly-commit-count-chart_' + $scope.repoIndex).fadeIn(100);
@@ -292,6 +308,7 @@ app.controller('weeklyCommitCountChartController', function ($scope, $log, Githu
 app.controller('hourlyCommitChartController', function ($scope, $log, GithubService, ChartingService) {
 
   var apiResponse;
+  var counter = 0;
   callApi();
 
   function callApi() {
@@ -304,7 +321,10 @@ app.controller('hourlyCommitChartController', function ($scope, $log, GithubServ
       if (response.length == 0 || angular.equals(response, {})) {
         $('#hourly-commit-error_' + $scope.repoIndex).fadeIn(100);
         $('#hourly-commit-chart_' + $scope.repoIndex).fadeOut(100);
-        callApi();
+        counter++;
+        if (counter < 5) {
+          callApi();          
+        }
       } else {
         $('#hourly-commit-error_' + $scope.repoIndex).fadeOut(100);
         $('#hourly-commit-chart_' + $scope.repoIndex).fadeIn(100);
